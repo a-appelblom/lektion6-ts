@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
-export default function useRenderCount() {
-  const count = useRef(1);
+export default function useRenderCount(): number {
+  const count = useRef<number>(1);
   useEffect(() => {
     count.current++;
   });

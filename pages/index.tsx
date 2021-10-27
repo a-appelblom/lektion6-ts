@@ -1,19 +1,21 @@
 import useTheme from "../lib/hooks/useTheme";
 import useRenderCount from "../lib/hooks/useRenderCount";
 import { THEME_ACTIONS } from "../lib/reducers/themeReducer";
+import { NextPage } from "next";
+import { ThemeContext } from "../components/context/ThemeProvider";
 
-export default function Home() {
-  const theme = useTheme();
-  const count = useRenderCount();
+const Home: NextPage = () => {
+  const themeContext: ThemeContext = useTheme();
+  const count: number = useRenderCount();
 
   return (
-    <div style={theme.theme.theme}>
+    <div style={themeContext.themeReducerState.theme}>
       <div style={{ height: "50vh", width: "50vw" }}>
         <h1 style={{ textAlign: "center" }}>Hej från koden</h1>
       </div>
       <button
         onClick={() =>
-          theme.themeDispatch({
+          themeContext.themeDispatch({
             type: THEME_ACTIONS.TOGGLE_DARK,
             payload: "dark",
           })
@@ -23,7 +25,7 @@ export default function Home() {
       </button>
       <button
         onClick={() =>
-          theme.themeDispatch({
+          themeContext.themeDispatch({
             type: THEME_ACTIONS.TOGGLE_LIGHT,
             payload: "light",
           })
@@ -33,7 +35,7 @@ export default function Home() {
       </button>
       <button
         onClick={() =>
-          theme.themeDispatch({
+          themeContext.themeDispatch({
             type: THEME_ACTIONS.TOGGLE_WACKY,
             payload: "wacky",
           })
@@ -46,4 +48,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default Home;
